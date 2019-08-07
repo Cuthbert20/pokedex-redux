@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { setUserName } from '../../ducks/reducer'
+import { setUsername } from '../../ducks/reducer'
+import { getPokemon } from '../../ducks/pokeReducer'
 import { connect } from 'react-redux'
-import {getPokemon} from '../../ducks/pokeReducer'
 
-const Cover = (props) => {
+const Cover = props => {
   return (
     <div className="cover">
       <div className="background">
@@ -18,11 +18,17 @@ const Cover = (props) => {
         </div>
         <div className="lid">
           <Link to="/open">
-            <div onClick={props.getPokemon}
-            className="triangle-button" />
+            <div 
+              onClick={props.getPokemon} 
+              className="triangle-button" 
+            />
           </Link>
           <div className="inputs">
-            <input onChange={e => props.setUserName(e.target.value)} placeholder="Username" type="text" />
+            <input
+              onChange={e => props.setUsername(e.target.value)}
+              placeholder="Username"
+              type="text"
+            />
           </div>
         </div>
       </div>
@@ -30,14 +36,14 @@ const Cover = (props) => {
   )
 }
 
-function mapStateToProps(reduxState){
-  const { user } = reduxState
-  //returning an obj with user that has been destructered
-  return {user}
+function mapStateToProps(reduxState) {
+  const { user } = reduxState.userInfo
+  return { user }
 }
 
-
-//IIFE closure funcion
-export default connect(mapStateToProps,{setUserName, getPokemon})(Cover)
-  //1. state we want
-  //action builders we're using
+export default connect(
+  mapStateToProps,
+  { setUsername, getPokemon }
+)(Cover)
+// 1. state we want
+// 2. action builders we're using

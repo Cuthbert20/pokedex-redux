@@ -16,19 +16,21 @@ const Open = (props) => (
         <div className="little-circle green" />
       </div>
       <div className="inside">
-        <h1>WELCOME {props.user}! </h1>
-        {props.loading? ('Loading...')
-        :(props.pokemon.results.map(elm => {
-          return <h3 key={elm.name}>{elm.name}</h3>
-        }))}
+        <h1>Welcome, {props.user}!</h1>
+        {props.loading ? ('Loading...') : (
+          props.pokemon.results.map(el => (
+            <h3 key={el.name}>
+              {el.name}
+            </h3>
+          ))
+        )}
       </div>
     </div>
   </div>
 )
-
-function mapStateToProps(state){
+function mapStateToProps(state) {
   const {user} = state.userInfo
-  const {pokemon, loading} = state.pokemon
+  const {pokemon, loading} = state.pokemonInfo
   return {user, pokemon, loading}
 }
 
